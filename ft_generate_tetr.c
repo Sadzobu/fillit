@@ -223,16 +223,12 @@ void	ft_gen_tetr(void)
         }
         break;
     }
-/*    printf("Figure: %d\nVariant: %d\nStarting Coordinates:\n\tx: %d\n\ty: %d\n", n_fig, n_v, strt_i, strt_j);
-    printf("Len row: %d\nLen column: %d\n", len_i[n_fig][n_v], len_j[n_fig][n_v]);
-    printf("The generated figure looks like this\n");*/
-    
     i = -1;
     while (++i < 4)
     {
         j = -1;
         while (++j < 3)
-            printf("%c ", tetr[i][j]);
+            printf("%c", tetr[i][j]);
         printf("%c", tetr[i][j]);
         printf("\n");
     }
