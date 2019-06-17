@@ -1,43 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "fillit.h"
+#include "libft.h"
+#include <fcntl.h>
 
 int		main(int argc, char **argv)
 {
-    char	**tetr_ar;
-    int		i;
-    int		fd;
-    int		rr;
-    int		res_ar[5] = {0, 0, 0, 0, 0};
+    int		size;
+	t_list	*list;
+    t_tetr  *tetr;
+	t_map	*map;
 
-    i = -1;
-    tetr_ar = (char **)malloc(sizeof(char *) * 4);
-    while (++i < 4)
-        tetr_ar[i] = (char *)malloc(sizeof(char) * 4);
-    if (argc < 2)
+    size = 4;
+	if (argc != 2)
+        return(ft_exit_error("usage: fillit input_file\n"));
+	if ((list = ft_tetrread(open(argv[1], O_RDONLY))) == NULL)
+        return(ft_exit_error("error\n"));
+    map  = ft_mapnew(size);
+    while (!ft_mapsolve(map, list))
     {
-        printf("usage : ./fillit [filename]\n");
-        return (0);
+        size++;
+        map = ft_mapnew(size);
     }
-    else
-    {
-        fd = open(argv[1], O_RDONLY);
-        while ((rr = ft_read_tetr(fd, tetr_ar)) > 0)
-            if ((rr = ft_verify_tetr(tetr_ar)) >= 0)
-                res_ar[rr]++;
-        if (rr < 0)
-        {
-            printf("error\n");
-            return (0);
-        }
-        if ((rr = ft_verify_tetr(tetr_ar)) >= 0)
-              res_ar[rr]++;
-        if (rr < 0)
-        {
-            printf("error\n");
-            return (0);
-        }
-        printf("%d %d %d %d %d\n", res_ar[0], res_ar[1], res_ar[2], res_ar[3], res_ar[4]);
-    }
-    return (0);
+	ft_mapprint(map);
+	ft_mapfree(map);
+	ft_listfree(list);
+	return (0);
 }

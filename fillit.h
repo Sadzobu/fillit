@@ -1,9 +1,42 @@
 #ifndef FILLIT_H
-
 # define FILLIT_H
-# include "get_next_line.h"
+# include <string.h>
+# include "libft.h"
 
-int		ft_read_tetr(int fd, char **ar);
-int		ft_verify_tetr(char **tetr);
+typedef struct	s_map
+{
+	int			size;
+	char		**array;
+}				t_map;
 
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+typedef struct	s_tetr
+{
+	char		**pos;
+	int			width;
+	int			height;
+	char		value;
+}				t_tetr;
+
+t_list			*ft_tetrread(int fd);
+
+void			ft_mapprint(t_map *map);
+void			ft_mapfree(t_map *map);
+t_map			*ft_mapnew(int size);
+int				ft_mapsolve(t_map *map, t_list *list);
+
+t_point			*point_new(int x, int y);
+
+t_tetr			*ft_tetrnew(char **pos, int width, int height, char c);
+void			ft_tetrfree(t_tetr *tetr);
+int				ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c);
+int				ft_tetrcanplace(t_tetr *tetr, t_map *map, int x, int y);
+
+t_list			*ft_listfree(t_list *list);
 #endif
+
