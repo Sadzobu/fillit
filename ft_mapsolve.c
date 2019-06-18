@@ -6,7 +6,7 @@
 /*   By: ncammie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 20:29:18 by ncammie           #+#    #+#             */
-/*   Updated: 2019/06/18 20:29:20 by ncammie          ###   ########.fr       */
+/*   Updated: 2019/06/18 21:05:30 by ncammie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,37 @@ t_map	*ft_mapnew(int size)
 	return (map);
 }
 
-int			ft_mapsolve(t_map *map, t_list *list)
+int		ft_mapsolve(t_map *map, t_list *list)
 {
-    int		x;
-    int		y;
-    t_tetr	*tetr;
+	int		x;
+	int		y;
+	int		coord[2];
+	t_tetr	*tetr;
 
-    if (list == NULL)
-        return (1);
-    tetr = (t_tetr *)(list->content);
-    y = -1;
-    while (++y < map->size - tetr->height + 1)
-    {
-        x = -1;
-        while (++x < map->size - tetr->width + 1)
-            if (ft_tetrcanplace(tetr, map, x, y))
-            {
-                ft_tetrplace(tetr, map, x, y, tetr->symb);
-                if (ft_mapsolve(map, list->next))
-                    return (1);
-                else
-                    ft_tetrplace(tetr, map, x, y, '.');
-            }
-    }
-    return (0);
+	if (list == NULL)
+		return (1);
+	tetr = (t_tetr *)(list->content);
+	y = -1;
+	while (++y < map->size - tetr->height + 1)
+	{
+		x = -1;
+		while (++x < map->size - tetr->width + 1)
+			if (ft_tetrcanplace(tetr, map, x, y))
+			{
+				coord[0] = x;
+				coord[1] = y;
+				ft_tetrplace(tetr, map, coord, tetr->symb);
+				if (ft_mapsolve(map, list->next))
+					return (1);
+				else
+					ft_tetrplace(tetr, map, coord, '.');
+			}
+	}
+	return (0);
 }
 
 int		ft_exit_error(char *msg)
 {
-    ft_putstr_fd(msg, 1);
-    return (1);
+	ft_putstr_fd(msg, 1);
+	return (1);
 }
