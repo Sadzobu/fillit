@@ -6,7 +6,7 @@
 /*   By: ncammie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 20:55:42 by ncammie           #+#    #+#             */
-/*   Updated: 2019/06/18 21:05:01 by ncammie          ###   ########.fr       */
+/*   Updated: 2019/06/18 21:52:51 by ncammie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int				ft_tetrvalidate(char *buf, int br);
 t_tetr			*ft_tetrseparate(char *pos, char symb);
 t_list			*ft_listfree(t_list *list);
 int				ft_exit_error(char *msg);
+t_list			*ft_free_return(t_list **list, char **buf);
 
 #endif

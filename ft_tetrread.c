@@ -6,18 +6,12 @@
 /*   By: ncammie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 20:11:19 by ncammie           #+#    #+#             */
-/*   Updated: 2019/06/18 21:44:21 by ncammie          ###   ########.fr       */
+/*   Updated: 2019/06/18 21:52:00 by ncammie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
-
-t_list	*ft_free_return(t_list **list, char **buf)
-{
-	ft_memdel((void **)buf);
-	return (ft_listfree(*list));
-}
 
 t_list	*ft_tetrread(int fd)
 {
@@ -100,4 +94,16 @@ t_tetr	*ft_tetrseparate(char *buf, char symb)
 		ft_strncpy((pos[i] = ft_strnew(x[1] - x[0] + 1)),
 				buf + x[0] + (i + y[0]) * 5, x[1] - x[0] + 1);
 	return ((tetr = ft_tetrnew(pos, x[1] - x[0] + 1, y[1] - y[0] + 1, symb)));
+}
+
+t_list	*ft_free_return(t_list **list, char **buf)
+{
+	ft_memdel((void **)buf);
+	return (ft_listfree(*list));
+}
+
+int		ft_exit_error(char *msg)
+{
+	ft_putstr_fd(msg, 1);
+	return (1);
 }

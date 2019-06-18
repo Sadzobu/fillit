@@ -6,12 +6,13 @@
 /*   By: ncammie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 20:29:18 by ncammie           #+#    #+#             */
-/*   Updated: 2019/06/18 21:05:30 by ncammie          ###   ########.fr       */
+/*   Updated: 2019/06/18 22:08:49 by ncammie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+#include <fcntl.h>
 
 void	ft_mapfree(t_map *map)
 {
@@ -82,8 +83,21 @@ int		ft_mapsolve(t_map *map, t_list *list)
 	return (0);
 }
 
-int		ft_exit_error(char *msg)
+int		main(int argc, char **argv)
 {
-	ft_putstr_fd(msg, 1);
-	return (1);
+	int		size;
+	t_list	*list;
+	t_map	*map;
+
+	size = 2;
+	if (argc != 2)
+		return (ft_exit_error("usage: fillit input_file\n"));
+	if ((list = ft_tetrread(open(argv[1], O_RDONLY))) == NULL)
+		return (ft_exit_error("error\n"));
+	while (!ft_mapsolve((map = ft_mapnew(size++)), list))
+		ft_mapfree(map);
+	ft_mapprint(map);
+	ft_mapfree(map);
+	ft_listfree(list);
+	return (0);
 }
