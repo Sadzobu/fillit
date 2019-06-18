@@ -15,7 +15,7 @@ int		main(int argc, char **argv)
         return(ft_exit_error("error\n"));    
     while (!ft_mapsolve((map = ft_mapnew(size++)), list))
         ft_mapfree(map);
-	ft_mapprint(map);
+    ft_mapprint(map);
 	ft_mapfree(map);
 	ft_listfree(list);
 	return (0);

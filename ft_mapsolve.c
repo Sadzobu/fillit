@@ -57,7 +57,7 @@ int			ft_mapsolve(t_map *map, t_list *list)
         while (++x < map->size - tetr->width + 1)
             if (ft_tetrcanplace(tetr, map, x, y))
             {
-                ft_tetrplace(tetr, map, x, y, tetr->value);
+                ft_tetrplace(tetr, map, x, y, tetr->symb);
                 if (ft_mapsolve(map, list->next))
                     return (1);
                 else

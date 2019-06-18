@@ -5,8 +5,8 @@ NAME	:= fillit
 all: $(NAME)
 
 $(NAME):
-	@gcc ft_tetrread.c ft_mapsolve.c ft_utils.c main.c libft/*.c -c -I . -I libft/
-	@gcc -g *.o -o $(NAME)
+	@gcc -Wall -Werror -Wextra ft_tetrread.c ft_mapsolve.c ft_utils.c main.c libft/*.c -c -I . -I libft/
+	@gcc -Wall -Werror -Wextra *.o -o $(NAME)
 
 clean:
 	@rm -rf *.o

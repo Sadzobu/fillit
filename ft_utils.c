@@ -28,7 +28,7 @@ void		ft_tetrfree(t_tetr *tetr)
 	ft_memdel((void **)&tetr);
 }
 
-t_tetr		*ft_tetrnew(char **pos, int width, int height, char value)
+t_tetr		*ft_tetrnew(char **pos, int width, int height, char symb)
 {
 	t_tetr		*tetr;
 
@@ -36,7 +36,7 @@ t_tetr		*ft_tetrnew(char **pos, int width, int height, char value)
 	tetr->pos = pos;
 	tetr->width = width;
 	tetr->height = height;
-	tetr->value = value;
+	tetr->symb = symb;
 	return (tetr);
 }
 

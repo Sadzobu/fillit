@@ -14,7 +14,7 @@ typedef struct	s_tetr
 	char		**pos;
 	int			width;
 	int			height;
-	char		value;
+	char		symb;
 }				t_tetr;
 
 
@@ -30,7 +30,7 @@ void			ft_tetrfree(t_tetr *tetr);
 void			ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c);
 int				ft_tetrcanplace(t_tetr *tetr, t_map *map, int x, int y);
 int				ft_tetrvalidate(char *buf, int br);
-t_tetr			*ft_tetrseparate(char *pos, char value);
+t_tetr			*ft_tetrseparate(char *pos, char symb);
 
 t_list			*ft_listfree(t_list *list);
 int				ft_exit_error(char *msg);

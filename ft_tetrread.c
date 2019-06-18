@@ -40,22 +40,15 @@ int	ft_tetrvalidate(char *buf, int br)
     cnc = 0;
     while (++i < 20)
     {
-        if (((i % 5) == 4) && buf[i] != '\n')
-            return (1);
-        if (((i % 5) < 4) && !(buf[i] == '#' || buf[i] == '.'))
-            return (1);
-        if ((buf[i] == '#') && ++cnt > 4)
+        if (((i % 5 == 4) && buf[i] != '\n') || ((i % 5 < 4) && !(buf[i] == '#' || buf[i] == '.')) ||
+         ((buf[i] == '#') && ++cnt > 4))
             return (1);
         if (buf[i] == '#')
 		{
-			if ((i + 1) < 20 && buf[i + 1] == '#')
-				cnc++;
-			if ((i - 1) >= 0 && buf[i - 1] == '#')
-				cnc++;
-			if ((i + 5) < 20 && buf[i + 5] == '#')
-				cnc++;
-			if ((i - 5) >= 0 && buf[i - 5] == '#')
-				cnc++;
+			((i + 1) < 20 && buf[i + 1] == '#') ? cnc++ : 1;
+            ((i - 1) >= 0 && buf[i - 1] == '#') ? cnc++ : 1;
+			((i + 5) < 20 && buf[i + 5] == '#') ? cnc++ : 1;
+			((i - 5) >= 0 && buf[i - 5] == '#') ? cnc++ : 1;
         }
     }
     if (br == 21 && buf[20] != '\n')
@@ -63,7 +56,7 @@ int	ft_tetrvalidate(char *buf, int br)
     return (cnc == 6 || cnc == 8);
 }
 
-t_tetr	*ft_tetrseparate(char *buf, char value)
+t_tetr	*ft_tetrseparate(char *buf, char symb)
 {
 	char		**pos;
 	int			i;
@@ -79,14 +72,10 @@ t_tetr	*ft_tetrseparate(char *buf, char value)
 	while (++i < 20)
 		if (buf[i] == '#')
 		{
-			if (i / 5 < y[0])
-				y[0] = i / 5;
-			if (i / 5 > y[1])
-				y[1] = i / 5;
-			if (i % 5 < x[0])
-				x[0] = i % 5;
-			if (i % 5 > x[1])
-				x[1] = i % 5;
+            i / 5 < y[0] ? y[0] = i / 5 : 1;
+			i / 5 > y[1] ? y[1] = i / 5 : 1;
+			i % 5 < x[0] ? x[0] = i % 5 : 1;
+			i % 5 > x[1] ? x[1] = i % 5 : 1;
 		}
 	pos = ft_memalloc(sizeof(char *) * (y[1] - y[0] + 1));
 	i = -1;
@@ -95,6 +84,6 @@ t_tetr	*ft_tetrseparate(char *buf, char value)
 		pos[i] = ft_strnew(x[1] - x[0] + 1);
 		ft_strncpy(pos[i], buf + x[0] + (i + y[0]) * 5, x[1] - x[0] + 1);
 	}
-	tetr = ft_tetrnew(pos, x[1] - x[0] + 1, y[1] - y[0] + 1, value);
+	tetr = ft_tetrnew(pos, x[1] - x[0] + 1, y[1] - y[0] + 1, symb);
 	return (tetr);
 }
