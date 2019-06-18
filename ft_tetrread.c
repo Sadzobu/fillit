@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tetrread.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncammie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/18 20:11:19 by ncammie           #+#    #+#             */
+/*   Updated: 2019/06/18 20:17:27 by ncammie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 #include "libft.h"
 
@@ -40,10 +52,12 @@ int	ft_tetrvalidate(char *buf, int br)
     cnc = 0;
     while (++i < 20)
     {
-        if (((i % 5 == 4) && buf[i] != '\n') ||
-            ((i % 5 < 4) && !(buf[i] == '#' || buf[i] == '.')) ||
-            ((buf[i] == '#') && ++cnt > 4))
-            return (1);
+        if ((i % 5 == 4) && buf[i] != '\n') 
+			return (0);
+		if ((i % 5 < 4) && !(buf[i] == '#' || buf[i] == '.'))
+			return (0);
+		if ((buf[i] == '#') && ++cnt > 4)
+            return (0);
         if (buf[i] == '#')
 		{
 			((i + 1) < 20 && buf[i + 1] == '#') ? cnc++ : 1;
@@ -53,7 +67,7 @@ int	ft_tetrvalidate(char *buf, int br)
         }
     }
     if (br == 21 && buf[20] != '\n')
-        return (1);
+        return (0);
     return (cnc == 6 || cnc == 8);
 }
 
