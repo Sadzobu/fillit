@@ -17,30 +17,30 @@ t_list		*ft_listfree(t_list *list)
 	return (NULL);
 }
 
-void		ft_tetrfree(t_tetr *tetri)
+void		ft_tetrfree(t_tetr *tetr)
 {
 	int y;
 
 	y = 0;
-	while (y < tetri->height)
+	while (y < tetr->height)
 	{
-		ft_memdel((void **)(&(tetri->pos[y])));
+		ft_memdel((void **)(&(tetr->pos[y])));
 		y++;
 	}
-	ft_memdel((void **)(&(tetri->pos)));
-	ft_memdel((void **)&tetri);
+	ft_memdel((void **)(&(tetr->pos)));
+	ft_memdel((void **)&tetr);
 }
 
 t_tetr		*ft_tetrnew(char **pos, int width, int height, char value)
 {
-	t_tetr		*tetris;
+	t_tetr		*tetr;
 
-	tetris = ft_memalloc(sizeof(t_tetr));
-	tetris->pos = pos;
-	tetris->width = width;
-	tetris->height = height;
-	tetris->value = value;
-	return (tetris);
+	tetr = ft_memalloc(sizeof(t_tetr));
+	tetr->pos = pos;
+	tetr->width = width;
+	tetr->height = height;
+	tetr->value = value;
+	return (tetr);
 }
 
 int		ft_tetrcanplace(t_tetr *tetr, t_map *map, int x, int y)
@@ -59,7 +59,7 @@ int		ft_tetrcanplace(t_tetr *tetr, t_map *map, int x, int y)
     return (1);
 }
 
-int 	ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c)
+void	ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c)
 {
     int i;
     int j;
@@ -72,5 +72,4 @@ int 	ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c)
             if (tetr->pos[j][i] == '#')
                 map->array[y + j][x + i] = c;
     }
-    return (1);
 }

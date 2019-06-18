@@ -9,12 +9,6 @@ typedef struct	s_map
 	char		**array;
 }				t_map;
 
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
-
 typedef struct	s_tetr
 {
 	char		**pos;
@@ -23,20 +17,23 @@ typedef struct	s_tetr
 	char		value;
 }				t_tetr;
 
-t_list			*ft_tetrread(int fd);
+
 
 void			ft_mapprint(t_map *map);
 void			ft_mapfree(t_map *map);
 t_map			*ft_mapnew(int size);
 int				ft_mapsolve(t_map *map, t_list *list);
 
-t_point			*point_new(int x, int y);
-
+t_list			*ft_tetrread(int fd);
 t_tetr			*ft_tetrnew(char **pos, int width, int height, char c);
 void			ft_tetrfree(t_tetr *tetr);
-int				ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c);
+void			ft_tetrplace(t_tetr *tetr, t_map *map, int x, int y, char c);
 int				ft_tetrcanplace(t_tetr *tetr, t_map *map, int x, int y);
+int				ft_tetrvalidate(char *buf, int br);
+t_tetr			*ft_tetrseparate(char *pos, char value);
 
 t_list			*ft_listfree(t_list *list);
+int				ft_exit_error(char *msg);
+
 #endif
 

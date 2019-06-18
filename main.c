@@ -6,7 +6,6 @@ int		main(int argc, char **argv)
 {
     int		size;
 	t_list	*list;
-    t_tetr  *tetr;
 	t_map	*map;
 
     size = 4;
@@ -17,6 +16,7 @@ int		main(int argc, char **argv)
     map  = ft_mapnew(size);
     while (!ft_mapsolve(map, list))
     {
+        ft_mapfree(map);
         size++;
         map = ft_mapnew(size);
     }

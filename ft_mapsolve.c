@@ -80,7 +80,7 @@ int			ft_mapsolve(t_map *map, t_list *list)
 
 int		ft_exit_error(char *msg)
 {
-    ft_putstr_fd(msg, 2);
+    ft_putstr_fd(msg, 1);
     return (1);
 }
 
