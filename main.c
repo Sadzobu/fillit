@@ -12,14 +12,9 @@ int		main(int argc, char **argv)
 	if (argc != 2)
         return(ft_exit_error("usage: fillit input_file\n"));
 	if ((list = ft_tetrread(open(argv[1], O_RDONLY))) == NULL)
-        return(ft_exit_error("error\n"));
-    map  = ft_mapnew(size);
-    while (!ft_mapsolve(map, list))
-    {
+        return(ft_exit_error("error\n"));    
+    while (!ft_mapsolve((map = ft_mapnew(size++)), list))
         ft_mapfree(map);
-        size++;
-        map = ft_mapnew(size);
-    }
 	ft_mapprint(map);
 	ft_mapfree(map);
 	ft_listfree(list);

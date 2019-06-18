@@ -5,12 +5,9 @@ void	ft_mapfree(t_map *map)
 {
 	int i;
 
-	i = 0;
-	while (i < map->size)
-	{
+	i = -1;
+	while (++i < map->size)
 		ft_memdel((void **)&(map->array[i]));
-		i++;
-	}
 	ft_memdel((void **)&(map->array));
 	ft_memdel((void **)&map);
 }
@@ -19,13 +16,9 @@ void	ft_mapprint(t_map *map)
 {
 	int i;
 
-	i = 0;
-	while (i < map->size)
-	{
-		ft_putstr(map->array[i]);
-		ft_putchar('\n');
-		i++;
-	}
+	i = -1;
+	while (++i < map->size)
+		ft_putendl(map->array[i]);
 }
 
 t_map	*ft_mapnew(int size)
@@ -37,17 +30,13 @@ t_map	*ft_mapnew(int size)
 	map = (t_map *)ft_memalloc(sizeof(t_map));
 	map->size = size;
 	map->array = (char **)ft_memalloc(sizeof(char *) * size);
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
 		map->array[i] = ft_strnew(size);
-		j = 0;
-		while (j < size)
-		{
+		j = -1;
+		while (++j < size)
 			map->array[i][j] = '.';
-			j++;
-		}
-		i++;
 	}
 	return (map);
 }
@@ -83,4 +72,3 @@ int		ft_exit_error(char *msg)
     ft_putstr_fd(msg, 1);
     return (1);
 }
-

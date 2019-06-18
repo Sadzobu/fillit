@@ -1,6 +1,6 @@
 #ifndef FILLIT_H
 # define FILLIT_H
-# include <string.h>
+
 # include "libft.h"
 
 typedef struct	s_map

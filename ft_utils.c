@@ -3,14 +3,14 @@
 
 t_list		*ft_listfree(t_list *list)
 {
-	t_tetr	*tetris;
+	t_tetr	*tetr;
 	t_list	*next;
 
 	while (list)
 	{
-		tetris = (t_tetr *)list->content;
+		tetr = (t_tetr *)list->content;
 		next = list->next;
-		ft_tetrfree(tetris);
+		ft_tetrfree(tetr);
 		ft_memdel((void **)&list);
 		list = next;
 	}
@@ -21,12 +21,9 @@ void		ft_tetrfree(t_tetr *tetr)
 {
 	int y;
 
-	y = 0;
-	while (y < tetr->height)
-	{
+	y = -1;
+	while (++y < tetr->height)
 		ft_memdel((void **)(&(tetr->pos[y])));
-		y++;
-	}
 	ft_memdel((void **)(&(tetr->pos)));
 	ft_memdel((void **)&tetr);
 }
