@@ -40,8 +40,9 @@ int	ft_tetrvalidate(char *buf, int br)
     cnc = 0;
     while (++i < 20)
     {
-        if (((i % 5 == 4) && buf[i] != '\n') || ((i % 5 < 4) && !(buf[i] == '#' || buf[i] == '.')) ||
-         ((buf[i] == '#') && ++cnt > 4))
+        if (((i % 5 == 4) && buf[i] != '\n') ||
+            ((i % 5 < 4) && !(buf[i] == '#' || buf[i] == '.')) ||
+            ((buf[i] == '#') && ++cnt > 4))
             return (1);
         if (buf[i] == '#')
 		{
@@ -80,10 +81,8 @@ t_tetr	*ft_tetrseparate(char *buf, char symb)
 	pos = ft_memalloc(sizeof(char *) * (y[1] - y[0] + 1));
 	i = -1;
 	while (++i < y[1] - y[0] + 1)
-	{
-		pos[i] = ft_strnew(x[1] - x[0] + 1);
-		ft_strncpy(pos[i], buf + x[0] + (i + y[0]) * 5, x[1] - x[0] + 1);
-	}
-	tetr = ft_tetrnew(pos, x[1] - x[0] + 1, y[1] - y[0] + 1, symb);
+		ft_strncpy((pos[i] = ft_strnew(x[1] - x[0] + 1)),
+                   buf + x[0] + (i + y[0]) * 5, x[1] - x[0] + 1);
+    tetr = ft_tetrnew(pos, x[1] - x[0] + 1, y[1] - y[0] + 1, symb);
 	return (tetr);
 }
