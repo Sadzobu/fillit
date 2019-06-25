@@ -24,7 +24,7 @@ t_list	*ft_tetrread(int fd)
 	list = NULL;
 	symb[0] = 'A';
 	buf = ft_strnew(21);
-	while ((br = read(fd, buf, 21)) >= 20)
+	while (((br = read(fd, buf, 21)) >= 20) && symb[0] <= 'Z')
 	{
 		if (!ft_tetrvalidate(buf, br))
 			return (ft_free_return(&list, &buf));
